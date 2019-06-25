@@ -4,7 +4,7 @@
   webserver =
     { config, pkgs, ... }:
     let
-      app = (import ./default.nix {}).package.override {};
+      app = (import ./default.nix {}).package;
     in
     {
       networking.firewall.allowedTCPPorts = [ 80 ];
@@ -13,8 +13,8 @@
         virtualHosts."default" = {
           locations = {
             "/" = {
-	            proxyPass = "http://localhost:3000/";
-	          };
+              proxyPass = "http://localhost:3000";
+            };
           };
         };
       };
